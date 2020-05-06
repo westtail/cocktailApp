@@ -14,6 +14,9 @@ RUN mkdir /cocktailApp
 ENV APP_ROOT /cocktailApp
 WORKDIR $APP_ROOT
 
+#rails コンソールで日本語を使えるようにする
+ENV LANG C.UTF-8
+
 # ホスト側（ローカル）のGemfileを追加する（ローカルのGemfileは【３】で作成）
 ADD ./Gemfile $APP_ROOT/Gemfile
 ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock

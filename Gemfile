@@ -68,3 +68,6 @@ gem 'html2slim'
 # bootstrap インストール
 gem 'bootstrap'
 gem 'autoprefixer-rails'
+
+# railsコンソールで日本語を使えるようにする
+gem 'rb-readline'
