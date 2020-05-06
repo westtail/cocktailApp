@@ -1,2 +1,25 @@
-h1 Cocktails#show
-p Find me in app/views/cocktails/show.html.slim
+h1 カクテル詳細
+
+.nav.justify-content-end
+  = link_to '検索結果へ戻る', cocktails_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th = Cocktail.human_attribute_name(:name)
+      td = @cocktail.name
+    tr
+      th = Cocktail.human_attribute_name(:base_alcohol)
+      td = @cocktail.base_alcohol
+    tr
+      th = Cocktail.human_attribute_name(:taste)
+      td = @cocktail.taste
+    tr
+      th = Cocktail.human_attribute_name(:glass_type)
+      td = @cocktail.glass_type
+    tr
+      th = Cocktail.human_attribute_name(:alcohol_percentage)
+      td = @cocktail.alcohol_percentage
+    tr
+      th = Cocktail.human_attribute_name(:cocktail_recipe)
+      td = simple_format(h(@cocktail.cocktail_recipe), {}, sanitize: false, wrapper_tag: "div")
+
