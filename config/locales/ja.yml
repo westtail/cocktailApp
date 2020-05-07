@@ -7,11 +7,18 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
-#    models:
-#      cocktail: カクテル
-#    attributes:
-#      cocktail:
-#        name: カクテル名
+    models:
+      cocktail: カクテル
+    attributes:
+      cocktail:
+        name: カクテル名
+        base_alcohol: ベースアルコール
+        taste: 味
+        alcohol_percentage: 度数
+        glass_type: グラスタイプ
+        cocktail_recipe: カクテルレシピ
+
+
   date:
     abbr_day_names:
     - 日
