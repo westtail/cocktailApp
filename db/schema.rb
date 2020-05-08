@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_154216) do
+ActiveRecord::Schema.define(version: 2020_05_07_163217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cocktails", force: :cascade do |t|
-    t.string "name"
-    t.string "base_alcohol"
-    t.string "taste"
-    t.integer "alcohol_percentage"
-    t.string "glass_type"
+    t.string "name", null: false
+    t.string "base_alcohol", null: false
+    t.string "taste", null: false
+    t.integer "alcohol_percentage", null: false
+    t.string "glass_type", null: false
     t.string "cocktail_recipe"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
