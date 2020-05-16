@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  # local...3000にアクセスしたときにcocktailsに誘導する
-  root to:  'home#index'
+  # ???/ を???/homeにリダイレクト
+  get '/', to: redirect('/home')
   # 全てのアクションを一括管理
   resources :cocktails
-  # getリクエスト定義
-  get 'home/index'
+
+  # getリクエスト定義 
+  # リクエスト 'URL', to: 'コントローラー名#アクション名'
+  get '/home', to: 'home#index'
 end
