@@ -75,3 +75,6 @@ gem 'autoprefixer-rails'
 
 # railsコンソールで日本語を使えるようにする
 gem 'rb-readline'
+
+# 検索機能gem 
+gem 'ransack'
