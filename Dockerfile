@@ -6,9 +6,11 @@ FROM ruby:2.5.1
 # build-essential ビルドツール  libpq-dev はPostgreSQLの略語  node.jsはjavascript用のランタイム
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxss1 libxtst6 xdg-utils unzip zip
 # rspecのテストでエラーが出るので修正  chome関連をインストール
+# エラーとして　chromeのバージョンとchromedriverのバージョンが違うとエラーが出ることがある
+#なので`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`で最新バージョンを指定
 RUN curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN dpkg -i google-chrome-stable_current_amd64.deb
-RUN curl -O https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
+RUN curl -O https://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
 RUN unzip chromedriver_linux64.zip
 
 # 作業ディレクトリの作成、設定
