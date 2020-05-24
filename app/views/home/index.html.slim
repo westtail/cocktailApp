@@ -4,7 +4,13 @@ h1 カクテルホーム
   .form-group.row
     = f.label :name_cont, '名称' , class: 'col-sm-2 col-form-label'
     .col-sm-10
-      = f.search_field :name_cont, class: 'form-control'
+      = f.search_field :name_cont, class: 'form-control'  
+  .form-group
+    = f.submit class: 'btn btn-outline-primary' 
+
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row
+    = f.select :base_alcohol_cont, [['ウイスキー','ウイスキー'],['ウォッカ','ウォッカ'],['ラム','ラム'],['ジン','ジン']], {selected: 'ウォッカ'}, class: 'form-control'
   .form-group
     = f.submit class: 'btn btn-outline-primary' 
 
