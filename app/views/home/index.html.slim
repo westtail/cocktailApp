@@ -2,15 +2,17 @@ h1 カクテルホーム
 
 = search_form_for @q, class: 'mb-5' do |f|
   .form-group.row
-    = f.label :name_cont, '名称' , class: 'col-sm-2 col-form-label'
-    .col-sm-10
+    = f.label :name_cont, '名称' , class: 'col-sm-4 col-form-label'
+    .col-sm-8
       = f.search_field :name_cont, class: 'form-control'  
-  .form-group
-    = f.submit class: 'btn btn-outline-primary' 
-
-= search_form_for @q, class: 'mb-5' do |f|
   .form-group.row
-    = f.select :base_alcohol_cont, [['ウイスキー','ウイスキー'],['ウォッカ','ウォッカ'],['ラム','ラム'],['ジン','ジン']], {selected: 'ウォッカ'}, class: 'form-control'
+    = f.label :base_alcohol_cont, 'ベースアルコール' , class: 'col-sm-4 col-form-label'
+    .col-sm-8
+      = f.select :base_alcohol_cont, [['ウイスキー','ウイスキー'],['ウォッカ','ウォッカ'],['ラム','ラム'],['ジン','ジン']],include_blank: true, class: 'form-control'
+  .form-group.row
+    = f.label :taste_cont, '味' , class: 'col-sm-4 col-form-label'
+    .col-sm-8
+      = f.select :taste_cont, [['辛い','辛い'],['普通','普通'],['甘い','甘い']],include_blank: true, class: 'form-control'
   .form-group
     = f.submit class: 'btn btn-outline-primary' 
 
