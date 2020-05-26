@@ -1,24 +1,10 @@
-# README
+# カクテル検索アプリ（仮）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## カクテルを検索
 
-Things you may want to cover:
+スタンダートなカクテルを名前、ベースのお酒、味、度数、グラスタイプで検索
+また、カクテルの材料と作り方も確認できる.
+(ver1)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+(更新予定)
+ユーザー登録機能とお気に入りカクテル登録機能を追加

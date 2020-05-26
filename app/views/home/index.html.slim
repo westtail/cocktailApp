@@ -1,5 +1,27 @@
 h1 カクテルホーム
 
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row
+    = f.label :name_cont, 'カクテル名' , class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.search_field :name_cont, class: 'form-control'  
+  .form-row
+   .form-group.col-sm-4(style="text-align: center;")
+    = f.label :base_alcohol_cont, 'ベースアルコール' , class: 'col-form-label'
+    .col-sm-4
+    = f.select :base_alcohol_cont, [['ウイスキー','ウイスキー'],['ウォッカ','ウォッカ'],['ラム','ラム'],['ジン','ジン']],include_blank: true, class: 'form-control'
+   .form-group.col-sm-4(style="text-align: center;")
+    = f.label :taste_cont, '味' , class: 'col-form-label'
+    .col-sm-4
+    = f.select :taste_cont, [['辛い','辛い'],['普通','普通'],['甘い','甘い']],include_blank: true, class: 'form-control'
+   .form-group.col-sm-4(style="text-align: center;")
+    = f.label :glass_type_cont, 'グラスタイプ' , class: 'col-form-label'
+    .col-sm-4
+    = f.select :glass_type_cont, [['ロング','ロング'],['ショート','ショート']],include_blank: true, class: 'form-control'
+   .form-group.col-sm-4    
+  .form-group
+    = f.submit class: 'btn btn-outline-primary' 
+
 .mb-3
 table.table.table-hover
     thead.thead-default
