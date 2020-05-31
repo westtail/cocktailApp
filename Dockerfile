@@ -2,12 +2,9 @@
 # 開発rubyバージョン指定
 FROM ruby:2.5.1
 
-# vimをインストール
-RUN apt-get update && apt-get -y install vim
-
 # 必要なパッケージのインストール（基本的に必要になってくるものだと思うので削らないこと）
 # build-essential ビルドツール  libpq-dev はPostgreSQLの略語  node.jsはjavascript用のランタイム
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxss1 libxtst6 xdg-utils unzip zip nginx
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxss1 libxtst6 xdg-utils unzip zip
 # rspecのテストでエラーが出るので修正  chome関連をインストール
 # エラーとして　chromeのバージョンとchromedriverのバージョンが違うとエラーが出ることがある
 #なので`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`で最新バージョンを指定
@@ -15,11 +12,6 @@ RUN curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd6
 RUN dpkg -i google-chrome-stable_current_amd64.deb
 RUN curl -O https://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
 RUN unzip chromedriver_linux64.zip
-
-# Nginx
-ADD nginx.conf /etc/nginx/sites-available/app.conf
-RUN rm -f /etc/nginx/sites-enabled/default && \
-    ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/app.conf
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /cocktailApp
@@ -39,8 +31,3 @@ ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
 # Gemfileのbundle install
 RUN bundle install
 ADD . $APP_ROOT
-
-RUN mkdir /app/tmp/sockets
-
-CMD bundle exec puma -d && \
-    /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
