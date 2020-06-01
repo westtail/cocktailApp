@@ -17,11 +17,31 @@ services:
     # docker-compose buildのときにビルドするためのDockerfileのパス
     build: .
     # docker-compose upで実行されるコマンド
-    command: rails s -p 3000 -b '0.0.0.0'
+    #command: rails s -p 3000 -b '0.0.0.0'
+    # webサーバー用のスクリプトを実行
+    command: sh scripts/launch.sh
     # dockerの中でデータを永続化する設定 コンテナ内のデータが消えずに残る
     volumes:
       - .:/cocktailApp
+      - public-data:/cocktailApp/public
+      - tmp-data:/cocktailApp/tmp
+      - log-data:/cocktailApp/log
     ports:
       - "3000:3000"
     links:
       - db
+  
+  nginx:
+    build: 
+      context: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    volumes:
+      - public-data:/cocktail/public
+      - tmp-data:/cocktailApp/tmp
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
