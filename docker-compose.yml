@@ -32,6 +32,7 @@ services:
       - db
   
   nginx:
+    # docker-compose buildのときにビルドするためのDockerfileのパス
     build: 
       context: ./nginx
     ports:
