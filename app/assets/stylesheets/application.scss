@@ -1,1 +1,13 @@
 @import "bootstrap";
+.form-row{
+    .form-group{
+        #q_base_alcohol_cont, #q_taste_cont, #q_glass_type_cont{
+            width: 40%;
+            height: 50%;
+        }
+    }
+}
+.btn-outline-primary{
+    width: 40%;
+    height: 60%;
+}
