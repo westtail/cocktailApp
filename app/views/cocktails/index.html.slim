@@ -10,6 +10,7 @@ table.table.table-hover
             th = Cocktail.human_attribute_name(:base_alcohol)
             th = Cocktail.human_attribute_name(:taste)
             th = Cocktail.human_attribute_name(:glass_type)
+            th = Cocktail.human_attribute_name(:alcohol_percentage)
 
     tbody
         - @cocktails.each do |cocktail|
@@ -18,3 +19,4 @@ table.table.table-hover
                 td = cocktail.base_alcohol
                 td = cocktail.taste
                 td = cocktail.glass_type
+                td = cocktail.alcohol_percentage
