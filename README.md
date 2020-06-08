@@ -11,3 +11,11 @@ https://www.cocktailsearch.ga/home
 
 (更新予定)
 ユーザー登録機能とお気に入りカクテル登録機能を追加
+
+使用技術
+
+ruby on rails
+ruby
+postgresSQL
+AWS
+Docker
