@@ -1,46 +1,109 @@
 require 'rails_helper'
 
 RSpec.describe "画面のテスト", type: :system do
-
-  #let(:cocktail_test_2) {FactoryBot.create(:cocktail, name:'テストネーム_2',base_alcohol: 'テストアルコール_2',taste: 'テストテイスト_2',alcohol_percentage: 'テストパーセント_2',glass_type: 'テストグラス_2')}
+  #let(:cocktail_1) {FactoryBot.create(:cocktail, name:'ウイスキー',base_alcohol: 'ウイスキー',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')}
+  
   # テスト前に実行
   before do
     # テストカクテル作成
     FactoryBot.create(:cocktail)
+    FactoryBot.create(:cocktail, name:'ウイスキー',base_alcohol: 'ウイスキー',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+    FactoryBot.create(:cocktail, name:'ウォッカ',base_alcohol: 'ウォッカ',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
   end
 
-    describe "ホーム画面のレイアウト" do    
-      it "タイトルがカクテルホーム" do
+    describe "ホーム画面のレイアウト" do
+      before do
         visit home_path
+      end
+      it "タイトルがカクテルホーム" do     
         expect(page).to have_selector 'h1', text: 'カクテルホーム'
       end
-      it "テーブルにカクテル名,ベースアルコール,味,グラスタイプがある" do
-        visit home_path
+      it "テーブルにカクテル名,ベースアルコール,味,グラスタイプ,度数がある" do
         expect(page).to have_selector 'table', text: 'カクテル名'
-        expect(page).to have_selector 'table', text: 'ベースアルコール'
+        expect(page).to have_selector 'table', text: 'ベースのお酒'
         expect(page).to have_selector 'table', text: '味'
         expect(page).to have_selector 'table', text: 'グラスタイプ'
+        expect(page).to have_selector 'table', text: '度数'
       end
-      it "テーブル画面にテストネーム、テストアルコール、テストテイスト、テストグラスがある" do
-        visit home_path
+      it "テーブルにテストネーム、テストアルコール、テストテイスト、テストグラス,15がある" do
         expect(page).to have_selector 'tbody', text: 'テストネーム'
         expect(page).to have_selector 'tbody', text: 'テストアルコール'
         expect(page).to have_selector 'tbody', text: 'テストテイスト'
         expect(page).to have_selector 'tbody', text: 'テストグラス'
+        expect(page).to have_selector 'tbody', text: '15'
+      end
+      it "テーブルにウイスキー、ウイスキー、辛い、ロング,40がある" do
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+        expect(page).to have_selector 'tbody', text: '辛い'
+        expect(page).to have_selector 'tbody', text: 'ロング'
+        expect(page).to have_selector 'tbody', text: '40'
       end
     end
+
+    describe "検索機能のテスト" do
+      before do
+        visit home_path
+      end
+      it "カクテル名をテストネームで検索するとテストネームが出てくる" do
+        fill_in 'カクテル名', with: 'テストネーム'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: 'テストネーム'
+      end
+      it "ベースのお酒をウイスキーで検索するとウイスキーが出てくる" do
+        select 'ウイスキー', from: 'q[base_alcohol_cont]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+      end
+      it "味を辛いで検索すると辛いが出てくる" do
+        select '辛い', from: 'q[taste_cont]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: '辛い'
+      end
+      it "グラスタイプをロングで検索するとロングが出てくる" do
+        select 'ロング', from: 'q[glass_type_cont]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+      end
+      it "最低度数をアルコールなしで検索すると40が出てくる" do
+        select 'アルコールなし(0%)', from: 'q[alcohol_percentage_gteq]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: '40'
+      end
+      it "最高度数をとても強いで検索すると40が出てくる" do
+        select 'とても強い(100%以下)', from: 'q[alcohol_percentage_lteq]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: '40'
+      end
+      it "最低度数をアルコールなし,最高度数をとても強いで検索すると40が出てくる" do
+        select 'アルコールなし(0%)', from: 'q[alcohol_percentage_gteq]'
+        select 'とても強い(100%以下)', from: 'q[alcohol_percentage_lteq]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        expect(page).to have_selector 'tbody', text: '40'
+      end
+      
+    end
+
 
     describe "検索結果画面のレイアウト" do
       it "cocktailのタイトルがカクテル" do
         visit cocktails_path
         expect(page).to have_selector 'h1', text: 'カクテル検索結果'
       end
-      it "テーブルにカクテル名,ベースアルコール,味,グラスタイプがある" do
+      it "テーブルにカクテル名,ベースアルコール,味,グラスタイプ,度数がある" do
         visit cocktails_path
         expect(page).to have_selector 'table', text: 'カクテル名'
-        expect(page).to have_selector 'table', text: 'ベースアルコール'
+        expect(page).to have_selector 'table', text: 'ベースのお酒'
         expect(page).to have_selector 'table', text: '味'
         expect(page).to have_selector 'table', text: 'グラスタイプ'
+        expect(page).to have_selector 'table', text: '度数'
       end
       it "カクテル名のURLが正しいか" do
         visit cocktails_path
