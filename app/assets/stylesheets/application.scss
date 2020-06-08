@@ -1,1 +1,22 @@
 @import "bootstrap";
+.form-row{
+    text-align: center;
+    .form-group{
+        #q_base_alcohol_cont,
+        #q_taste_cont,
+        #q_glass_type_cont{
+            width: 80%;
+            height: 50%;
+            text-align: center;
+        }
+        #q_alcohol_percentage_gteq,
+        #q_alcohol_percentage_lteq{
+            width: 47%;
+            height: 50%;
+        }
+    }
+}
+.btn-outline-primary{
+    width: 40%;
+    height: 60%;
+}

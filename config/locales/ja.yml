@@ -12,7 +12,7 @@ ja:
     attributes:
       cocktail:
         name: カクテル名
-        base_alcohol: ベースアルコール
+        base_alcohol: ベースのお酒
         taste: 味
         alcohol_percentage: 度数
         glass_type: グラスタイプ
