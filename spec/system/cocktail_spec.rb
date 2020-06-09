@@ -9,6 +9,8 @@ RSpec.describe "画面のテスト", type: :system do
     FactoryBot.create(:cocktail)
     FactoryBot.create(:cocktail, name:'ウイスキー',base_alcohol: 'ウイスキー',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
     FactoryBot.create(:cocktail, name:'ウォッカ',base_alcohol: 'ウォッカ',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+    FactoryBot.create(:cocktail, name:'ラム',base_alcohol: 'ラム',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+    FactoryBot.create(:cocktail, name:'ジン',base_alcohol: 'ジン',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
   end
 
     describe "ホーム画面のレイアウト" do
@@ -88,7 +90,23 @@ RSpec.describe "画面のテスト", type: :system do
         expect(page).to have_selector 'h1', text: 'カクテル検索結果'
         expect(page).to have_selector 'tbody', text: '40'
       end
-      
+    end
+
+    describe "ページネーションのテスト" do
+      before do
+        FactoryBot.create(:cocktail)
+        FactoryBot.create(:cocktail, name:'ウイスキー',base_alcohol: 'ウイスキー',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+        FactoryBot.create(:cocktail, name:'ウォッカ',base_alcohol: 'ウォッカ',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+        FactoryBot.create(:cocktail, name:'ラム',base_alcohol: 'ラム',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+        FactoryBot.create(:cocktail, name:'ジン',base_alcohol: 'ジン',taste: '辛い',alcohol_percentage: '40',glass_type: 'ロング')
+        FactoryBot.create(:cocktail, name:'ジントニック',base_alcohol: 'ジン',taste: '普通',alcohol_percentage: '15',glass_type: 'ロング')
+        visit home_path
+      end
+      it "ページネーションの２番目をクリックすると６番目のお酒が出てくる" do
+        click_link '2'
+        expect(page).to have_selector 'h1', text: 'カクテルホーム'
+        expect(page).to have_selector 'tbody', text: 'ロング'
+      end
     end
 
 

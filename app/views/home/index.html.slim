@@ -36,6 +36,9 @@ h1 カクテルホーム
     = f.submit class: 'btn btn-outline-primary' 
 
 .mb-3
+  = paginate @cocktails
+  = page_entries_info @cocktails
+
 table.table.table-hover
     thead.thead-default
         tr

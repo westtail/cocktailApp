@@ -78,3 +78,6 @@ gem 'rb-readline'
 
 # 検索機能gem 
 gem 'ransack'
+
+#ページネーションgem
+gem 'kaminari'
