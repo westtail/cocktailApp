@@ -18,7 +18,7 @@ table.table.table-hover
     tbody
         - @cocktails.each do |cocktail|
             tr
-                td = link_to cocktail.name, cocktail
+                td = link_to cocktail.name, cocktail_path(cocktail.id, cocktail_params)
                 td = cocktail.base_alcohol
                 td = cocktail.taste
                 td = cocktail.glass_type

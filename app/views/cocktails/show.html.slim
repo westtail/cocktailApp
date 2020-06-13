@@ -2,8 +2,11 @@ h1 カクテル詳細
 
 .nav.justify-content-end
   = link_to 'ホームへ戻る', home_path, class: 'nav-link'
-.nav.justify-content-end
-  = link_to '検索結果へ戻る', cocktails_path, class: 'nav-link'
+- if @q.nil? == true
+-else
+  .nav.justify-content-end
+    = link_to '検索結果へ戻る', cocktails_path(cocktail_params), class: 'nav-link'
+
 table.table.table-hover
   tbody
     tr
@@ -24,4 +27,3 @@ table.table.table-hover
     tr
       th = Cocktail.human_attribute_name(:cocktail_recipe)
       td = simple_format(h(@cocktail.cocktail_recipe), {}, sanitize: false, wrapper_tag: "div")
-
