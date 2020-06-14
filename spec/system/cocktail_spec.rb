@@ -154,4 +154,42 @@ RSpec.describe "画面のテスト", type: :system do
       end
     end
 
+    describe "ページ移動のパラメータ保持" do
+      before do
+        visit home_path
+      end
+      it "ベースのお酒をウイスキーで検索後ウイスキーの詳細を確認" do
+        select 'ウイスキー', from: 'q[base_alcohol_cont]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        click_link 'ウイスキー'
+        expect(page).to have_selector 'h1', text: 'カクテル詳細'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+      end
+      it "ホームからウイスキーの詳細を確認" do
+        click_link 'ウイスキー'
+        expect(page).to have_selector 'h1', text: 'カクテル詳細'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+      end
+      it "ベースのお酒を検索後検索結果へ戻る" do
+        select 'ウイスキー', from: 'q[base_alcohol_cont]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        click_link 'ウイスキー'
+        expect(page).to have_selector 'h1', text: 'カクテル詳細'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+        click_link '検索結果へ戻る'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+      end
+      it "ベースのお酒を検索後ホームへ戻る" do
+        select 'ウイスキー', from: 'q[base_alcohol_cont]'
+        click_button '検索'
+        expect(page).to have_selector 'h1', text: 'カクテル検索結果'
+        click_link 'ウイスキー'
+        expect(page).to have_selector 'h1', text: 'カクテル詳細'
+        expect(page).to have_selector 'tbody', text: 'ウイスキー'
+        click_link 'ホームへ戻る'
+        expect(page).to have_selector 'h1', text: 'カクテルホーム'
+      end
+    end
 end
