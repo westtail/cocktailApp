@@ -10,7 +10,7 @@ h1 カクテルホーム
     .form-group.col-sm-2
       = f.label :base_alcohol_cont, 'ベースのお酒' , class: 'col-form-label'
       .col-sm-4
-      = f.select :base_alcohol_cont, [['ウイスキー','ウイスキー'],['ウォッカ','ウォッカ'],['ラム','ラム'],['ジン','ジン']],include_blank: true, class: 'form-control'
+      = f.select :base_alcohol_cont, [['ウイスキー','ウイスキー'],['ウォッカ','ウォッカ'],['ラム','ラム'],['ジン','ジン'],['テキーラ','テキーラ']],include_blank: true, class: 'form-control'
     .form-group.col-sm-1
       = f.label :taste_cont, '味' , class: 'col-form-label'
       .col-sm-4
@@ -19,7 +19,7 @@ h1 カクテルホーム
     .form-group.col-sm-2
       = f.label :glass_type_cont, 'グラスタイプ' , class: 'col-form-label'
       .col-sm-4
-      = f.select :glass_type_cont, [['ロング','ロング'],['ショート','ショート']],include_blank: true, class: 'form-control'
+      = f.select :glass_type_cont, [['ロング','ロング'],['ショート','ショート'],['ショット','ショット']],include_blank: true, class: 'form-control'
 
     .form-group.col-sm-4
       .
