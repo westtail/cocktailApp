@@ -1,5 +1,5 @@
 # カクテル検索アプリ（仮）
-# 現在はhttps://github.com/westtail/cocktailSearchAppで新しく作り直しています
+# 現在は https://github.com/westtail/cocktailSearchApp で新しく作り直しています
 ## カクテルを検索
 
 スタンダートなカクテルを名前、ベースのお酒、味、度数、グラスタイプで検索
